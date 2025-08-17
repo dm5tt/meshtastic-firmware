@@ -887,6 +887,7 @@ void Power::readPowerStatus()
     // a row. NOTE: min LiIon/LiPo voltage is 2.0 to 2.5V, current OCV min is set to 3100 that is large enough.
     //
 
+#ifndef SOLARMESHTASTICNODE
     if (batteryLevel && powerStatus2.getHasBattery() && !powerStatus2.getHasUSB()) {
         if (batteryLevel->getBattVoltage() < OCV[NUM_OCV_POINTS - 1]) {
             low_voltage_counter++;
@@ -904,6 +905,7 @@ void Power::readPowerStatus()
             low_voltage_counter = 0;
         }
     }
+#endif
 }
 
 int32_t Power::runOnce()
